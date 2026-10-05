@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: realtime-fraud-detection
+  labels:
+    app: realtime-fraud-detection
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: realtime-fraud-detection
+  template:
+    metadata:
+      labels:
+        app: realtime-fraud-detection
+    spec:
+      containers:
+        - name: api
+          image: realtime-fraud-detection:local
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /v1/readyz
+              port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: realtime-fraud-detection
+spec:
+  selector:
+    app: realtime-fraud-detection
+  ports:
+    - port: 80
+      targetPort: 8080
