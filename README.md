@@ -1,5 +1,12 @@
 # Real-Time Fraud Detection System
 
+## Overview
+
+A lab that scores transactions for fraud risk in real time. Each transaction goes through feature extraction and a scikit-learn model to a risk score and a fraud or legitimate label. An in-memory Redis stand-in caches results so repeated lookups are idempotent, and an event log is readable at `GET /events`. It never charges a card.
+
+- **Built with:** Python, scikit-learn, FastAPI, pytest, GitHub Actions
+- **Scope:** Laptop lab with no hosted model and an in-memory cache instead of real Redis; cluster apply stays false until a human approves.
+
 <!-- project-guide:start -->
 ## Project guide
 
